@@ -21,12 +21,7 @@ const resultModel = require('./models/result')
 
 const app = express()
 
-app.use(cors({
-    origin: [host],
-    methods: ["POST", "GET"],
-    credentials: true
-}
-))
+app.use(cors());
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({
