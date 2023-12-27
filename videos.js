@@ -1,5 +1,7 @@
 require('dotenv').config();
 const PORT1 = process.env.PORT;
+const host = process.env.REACT_APP_API_BASE_URL;
+const DATABASE = process.env.DATABASE_URL;
 const port = PORT1 || 5003
 const express = require('express')
 const mongoose = require('mongoose')
@@ -20,7 +22,7 @@ const resultModel = require('./models/result')
 const app = express()
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: [host],
     methods: ["POST", "GET"],
     credentials: true
 }
@@ -38,7 +40,7 @@ app.use(session({
 }))
 
 
-mongoose.connect("mongodb+srv://anantk15:root@cluster0.972saxu.mongodb.net/videos?retryWrites=true&w=majority").then(() => {
+mongoose.connect(DATABASE).then(() => {
     console.log("success mon")
 })
 
