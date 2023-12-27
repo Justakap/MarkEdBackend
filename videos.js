@@ -21,7 +21,10 @@ const resultModel = require('./models/result')
 
 const app = express()
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://markeducation.netlify.app',
+    credentials: true,
+}));
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({
@@ -45,11 +48,11 @@ app.get('/getData', (req, res) => {
         .catch(err => res.json(err))
 })
 
-app.get('/getDataUser',(req,res)=>{
+app.get('/getDataUser', (req, res) => {
     UserModel.find()
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-   })
+        .then(users => res.json(users))
+        .catch(err => res.json(err))
+})
 
 app.get('/branches', (req, res) => {
     branchModel.find()
@@ -253,7 +256,7 @@ app.post('/assesment/addQuestion', (req, res) => {
 })
 
 // add assesment
-app.post('/assesment/addAssesment',async (req, res) => {
+app.post('/assesment/addAssesment', async (req, res) => {
     const { subject, number, TotalQuestion } = req.body
 
     const data = {
@@ -272,7 +275,7 @@ app.post('/assesment/addAssesment',async (req, res) => {
             res.json("added")
             console.log(data)
         }
-        else if(check){
+        else if (check) {
             res.json("exist")
 
         }
